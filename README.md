@@ -1,7 +1,7 @@
 # FECAP - Fundação de Comércio Álvares Penteado
 
 <p align="center">
-<a href= "https://github.com/2026-1-NCC3/Projeto1"><img src="Imagens/LogoVitalTech" alt="Logo = VitalTech" width="30%" border="0"></a>
+<a href= "https://github.com/2026-1-NCC3/Projeto1"><img src="Imagens/LogoVitalTech.png" alt="Logo = VitalTech" width="30%" border="0"></a>
 </p>
 
 # VitalTech
