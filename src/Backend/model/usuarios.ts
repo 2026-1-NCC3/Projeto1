@@ -21,7 +21,16 @@ export async function CadastrarPaciente(data : NovoPaciente) {
                     primeiro_acesso: true
                 }
             })
-            return paciente
+            return {
+               id_paciente: paciente.id_paciente,
+                nome: usuario.nome,
+                email: usuario.email,
+                hash_senha: usuario.hash_senha,
+                data_nascimento: usuario.data_nascimento,
+                telefone: usuario.telefone,
+                primeiro_acesso: paciente.primeiro_acesso,
+                is_ativo: paciente.is_ativo
+            }
         }
     } catch (error) {
         console.log(error)

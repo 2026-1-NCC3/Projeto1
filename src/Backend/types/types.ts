@@ -5,7 +5,4 @@ export type NovoPaciente = {
     hash_senha: string,
     data_nascimento: Date,
     telefone: string,
-    id_paciente: number,
-    is_ativo: boolean,
-    primeiro_acesso: boolean
 }
