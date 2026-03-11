@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model administradores {
+  id_administrador   Int      @id
+  hash_palavra_chave String   @db.VarChar(200)
+  usuarios           usuarios @relation(fields: [id_administrador], references: [id_usuario], onDelete: Cascade, onUpdate: NoAction, map: "fk_administrador")
+}
+
+model pacientes {
+  id_paciente     Int      @id
+  is_ativo        Boolean
+  primeiro_acesso Boolean
+  usuarios        usuarios @relation(fields: [id_paciente], references: [id_usuario], onDelete: Cascade, onUpdate: NoAction, map: "fk_paciente")
+}
+
+model profissionais {
+  id_profissional Int      @id
+  crm             String   @db.VarChar(10)
+  usuarios        usuarios @relation(fields: [id_profissional], references: [id_usuario], onDelete: Cascade, onUpdate: NoAction, map: "fk_profissional")
+}
+
+model usuarios {
+  id_usuario      Int              @id @default(autoincrement())
+  nome            String           @db.VarChar(100)
+  email           String           @unique @db.VarChar(256)
+  hash_senha      String           @db.VarChar(200)
+  data_nascimento DateTime         @db.Date
+  telefone        String           @db.VarChar(15)
+  administradores administradores?
+  pacientes       pacientes?
+  profissionais   profissionais?
+}
