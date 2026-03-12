@@ -1,3 +1,4 @@
+import { CriptografarSenha } from "../libs/bcrypt.ts";
 import { CadastrarPaciente, ValidarEmail } from "../model/usuarios.ts";
 import type { NovoPaciente } from "../types/types.ts";
 import { ERROR_REQUIRED_FIELDS, ERROR_USED_EMAIL } from "../util/errors.ts";
@@ -25,7 +26,8 @@ export async function ValidarCadastroPaciente(data : NovoPaciente) {
     }
 
     data.data_nascimento = new Date(data.data_nascimento)
-    
+    data.hash_senha = await CriptografarSenha(data.hash_senha)
+
     let cadastrarPaciente = await CadastrarPaciente(data)
     return {
         data: cadastrarPaciente,

@@ -3,6 +3,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.4.0",
     "bcrypt": "^6.0.0",
