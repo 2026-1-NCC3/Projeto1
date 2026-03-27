@@ -14,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Calendar;
 
 public class CadastroActivity extends AppCompatActivity {
-
     EditText editTextDataNasc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
