@@ -3,6 +3,9 @@ package com.vitaltech.mayayamamoto.activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -44,9 +47,60 @@ public class CadastroActivity extends AppCompatActivity {
         editTxtEmail = findViewById(R.id.editTxtEmail);
         editTxtSenha = findViewById(R.id.editTxtSenha);
         editTextDataNasc = findViewById(R.id.editTxtDataNasc);
+
         editTxtTelefone = findViewById(R.id.editTxtTelefone);
+        // fazendo com que o +55 ja apareca quando a tela iniciar
+        editTxtTelefone.setText("+55 ");
+        editTxtTelefone.setSelection(editTxtTelefone.getText().length());
 
         btCadastro = findViewById(R.id.btCadastro);
+
+        // Formatacao do telefone
+        editTxtTelefone.addTextChangedListener(new TextWatcher() {
+
+            boolean isUpdating;
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString().replaceAll("[^\\d]", "");
+
+                // removendo o 55 duplicado
+                if (str.startsWith("55")) {
+                    str = str.substring(2);
+                }
+
+                if (isUpdating){
+                    isUpdating = false;
+                    return;
+                }
+
+                StringBuilder newStr = new StringBuilder("+55 ");
+
+                int i = 0;
+
+                for (char c : str.toCharArray()){
+                    if (i == 0) newStr.append("(");
+                    if (i == 2) newStr.append(") ");
+                    if (i == 7) newStr.append("-");
+
+                    newStr.append(c);
+                    i++;
+                }
+
+                isUpdating = true;
+                editTxtTelefone.setText(newStr.toString());
+                editTxtTelefone.setSelection(newStr.length());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         btCadastro.setOnClickListener(v -> {
             // Pegando dados do usuario
@@ -55,6 +109,46 @@ public class CadastroActivity extends AppCompatActivity {
             String senhaStr = editTxtSenha.getText().toString();
             String data_nasc = editTextDataNasc.getText().toString();
             String telefone = editTxtTelefone.getText().toString();
+
+            boolean erro = false;
+
+            // Verificacando se os campos estao vazios
+            if(nomeStr.isEmpty()){
+                editTxtNome.setError("Nome obrigatório");
+                erro = true;
+            }
+
+            if(emailStr.isEmpty()){
+                editTxtEmail.setError("Email obrigatório");
+                erro = true;
+            }
+
+            if(senhaStr.isEmpty()){
+                editTxtSenha.setError("Senha obrigatória");
+                erro = true;
+            }
+
+            if(data_nasc.isEmpty()){
+                editTextDataNasc.setError("Data de nascimento obrigatória");
+                erro = true;
+            }
+
+            if(telefone.length() < 11){
+                editTxtTelefone.setError("Telefone incompleto");
+                erro = true;
+            }
+
+            if(erro){
+                return;
+            }
+
+            // Validacao de email
+            // Patterns.EMAIL_ADDRESS - padrão do android
+            // matcher(email) - pega o email digitado
+            if(!Patterns.EMAIL_ADDRESS.matcher(emailStr).matches()) {
+                editTxtEmail.setError("Email inválido");
+                return;
+            }
 
             // Criando o objeto que vai virar JSON (Onde o GSON vai converter automaticamente)
             Usuarios usuario = new Usuarios(nomeStr, emailStr, senhaStr, data_nasc, telefone);
