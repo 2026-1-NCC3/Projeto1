@@ -69,6 +69,9 @@ Senha: senha123
 
 [Clique aqui para baixar o aplicativo](https://github.com/2026-1-NCC3/Projeto1/blob/main/Documentos/Entrega%202/Projeto%20Interdisciplinar%20Aplicativo%20M%C3%B3vel/mayayamamoto.apk)
 
+Login: mauricio@gmail.com<br>
+Senha: 1234
+
 ### 📌 Como instalar
 
 1. Baixe o arquivo `.apk`
