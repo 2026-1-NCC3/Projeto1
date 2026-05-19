@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/gradient_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cadastro"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_background">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imgMaya"
@@ -144,9 +145,10 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:background="@drawable/bg_edittext_arredondado"
-            android:ems="10"
             android:hint="Digite sua data de nascimento"
-            android:inputType="date"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"
             android:paddingStart="16dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
