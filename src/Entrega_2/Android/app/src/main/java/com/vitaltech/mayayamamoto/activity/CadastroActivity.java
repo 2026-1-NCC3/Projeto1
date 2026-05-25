@@ -178,7 +178,6 @@ public class CadastroActivity extends AppCompatActivity {
             });
         });
 
-
         // Criar calendario no edit text da data de nascimento
         editTextDataNasc.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
@@ -190,8 +189,8 @@ public class CadastroActivity extends AppCompatActivity {
             DatePickerDialog datePicker = new DatePickerDialog(
                     CadastroActivity.this,
                     (view, selectedYear, selectedMonth, selectedDay) -> {
-                        String data = String.format("%02d/%02d/%d",
-                                selectedDay, selectedMonth + 1, selectedYear);
+                        String data = String.format("%d-%02d-%02d",
+                                selectedYear, selectedMonth + 1, selectedDay);
                         editTextDataNasc.setText(data);
 
                         editTextDataNasc.setError(null);
